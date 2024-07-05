@@ -1,0 +1,41 @@
+﻿@model TranDinhBien_BanHang.Models.Category
+@{
+    ViewBag.Title = "Create";
+}
+
+<div class="span9">
+    <div class="well">
+
+        @using (Html.BeginForm("Create", "Category", new { area = "Admin" }, FormMethod.Post, new { enctype = "multipart/dorm-data", @class = "form-horizontal", @style = "margin: 0px 160px 20px;" }))
+        {
+            <h4>Thêm danh mục</h4>
+            <div class="control-group">
+
+                
+                @Html.LabelFor(r => r.CategoryName, "Tên danh mục", new { @class = "control-label" })
+                <div class="controls">
+                    @Html.TextBoxFor(r => r.CategoryName, new { @class = "form-control", placeholder = "Tên danh mục" })
+
+                    
+                </div>
+                @Html.ValidationMessageFor(r => r.CategoryName)
+            </div>
+
+            <div class="control-group">
+
+                @Html.LabelFor(r => r.CategoryAvatar, "Ảnh", new { @class = "control-label"  })
+                <div class="controls">
+                    @Html.TextBoxFor(r => r.CategoryAvatar, new { @class = "form-control", placeholder = "Ảnh", type = "file" })
+                </div>
+            </div>
+
+            <button class="btn btn-success">Lưu</button>
+            <!-- Sử dụng Url.Action để tạo đường dẫn đúng -->
+            <a href="/admin/category/index" class="btn btn-danger">Hủy</a>
+
+        }
+
+    </div>
+
+</div>
+

@@ -1,0 +1,148 @@
+﻿@model TranDinhBien_BanHang.Models.Product
+@{
+    ViewBag.Title = "Edit";
+   
+}
+
+<div class="span9">
+    <h3>Chỉnh sửa sản phẩm</h3>
+    <div class="well">
+        @using (Html.BeginForm("Edit", "Product",new {area ="Admin" }, FormMethod.Post, new { enctype = "multipart/dorm-data", @class = "form-horizontal", @style = "margin: 0px 160px 20px;" }))
+        {
+
+           
+            @Html.TextBoxFor(r => r.ProductID, "ProductID", new { @class = "form-control", type = "hidden" })
+            <div class="control-group">
+
+                @Html.LabelFor(r => r.ProductName, "Tên sản phẩm", new { @class = "control-label" })
+                <div class="controls">
+                    @Html.TextBoxFor(r => r.ProductName, new { @class = "form-control", placeholder = "Tên sản phẩm" })
+
+                @Html.ValidationMessageFor(r => r.ProductName)
+                </div>
+            </div>
+
+            <div class="control-group">
+
+                @Html.LabelFor(r => r.Avatar, "Ảnh", new { @class = "control-label" })
+                <div class="controls">
+                    @Html.TextBoxFor(r => r.Avatar, new { @class = "form-control", placeholder = "Ảnh", type = "file" })
+                </div>
+                @Html.ValidationMessageFor(r => r.Avatar)
+            </div>
+
+
+            <div class="control-group">
+
+                @Html.LabelFor(r => r.CategoryID, "Mã thể loại", new { @class = "control-label" })
+                <div class="controls">
+                    @Html.DropDownListFor(row => row.CategoryID,
+                     new SelectList(ViewBag.Categories, "CategoryID", "CategoryName"),
+                     "Vui lòng chọn...", new { @class = "form-control" })
+
+                </div>
+                @Html.ValidationMessageFor(r => r.CategoryID)
+            </div>
+            <div class="control-group">
+
+                @Html.LabelFor(r => r.BrandID, "Mã thương hiệu", new { @class = "control-label" })
+                <div class="controls">
+                    @Html.DropDownListFor(row => row.BrandID,
+                     new SelectList(ViewBag.Brand, "BrandID", "BrandName"),
+                     "Vui lòng chọn...", new { @class = "form-control" })
+
+                </div>
+                @Html.ValidationMessageFor(r => r.BrandID)
+            </div>
+
+
+            <div class="control-group">
+
+                @Html.LabelFor(r => r.ShortDes, "Mô tả ngắn", new { @class = "control-label" })
+                <div class="controls">
+                    @Html.TextAreaFor(r => r.ShortDes, new { @class = "form-control", placeholder = "Mô tả ngắn", rows = "3", cols = "50" })
+
+                </div>
+            </div>
+
+            <div class="control-group">
+
+                @Html.LabelFor(r => r.FullDescription, "Mô tả đầy đủ", new { @class = "control-label" })
+                <div class="controls">
+                    @Html.TextAreaFor(r => r.FullDescription, new { @class = "form-control", placeholder = "Mô đầy đủ", rows = "3", cols = "50" })
+
+                </div>
+            </div>
+
+
+
+            <div class="control-group">
+
+                @Html.LabelFor(r => r.Price, "Giá sản phẩm", new { @class = "control-label" })
+                <div class="controls">
+                    @Html.TextBoxFor(r => r.Price, new { @class = "form-control", placeholder = "Giá sản phẩm", type = "number" })
+
+                </div>
+                @Html.ValidationMessageFor(r => r.Price)
+            </div>
+
+            <div class="control-group">
+
+                @Html.LabelFor(r => r.PriceDiscount, "Giảm giá", new { @class = "control-label" })
+                <div class="controls">
+                    @Html.TextBoxFor(r => r.PriceDiscount, new { @class = "form-control", placeholder = "Giảm giá", type = "number" })
+
+                </div>
+            </div>
+
+
+            <div class="control-group">
+
+                @Html.LabelFor(r => r.CreateAt, "Ngày tạo", new { @class = "control-label" })
+                <div class="controls">
+                    @Html.TextBoxFor(r => r.CreateAt, new { @class = "form-control", placeholder = "Ngày tạo", type = "date" })
+                </div>
+            </div>
+
+            <div class="control-group">
+
+                @Html.LabelFor(r => r.UpdateAt, "Ngày cập nhật", new { @class = "control-label" })
+
+                <div class="controls">
+                    @Html.TextBoxFor(r => r.UpdateAt, new { @class = "form-control", placeholder = "Ngày cập nhật", type = "date" })
+
+                </div>
+            </div>
+            <div class="control-group">
+
+                @Html.LabelFor(r => r.Status, "Trạng thái", new { @class = "control-label" })
+
+                <div class="controls">
+                    @Html.DropDownListFor(r => r.Status, new List<SelectListItem>()
+               {
+                   new SelectListItem(){ Text="Đang mở bán", Value="Đang mở bán"},
+                   new SelectListItem(){ Text="Hết hàng", Value="Hết hàng"}
+               }, "Vui lòng chọn...", new { @class = "form-control" })
+
+                </div>
+                @Html.ValidationMessageFor(r => r.Status)
+            </div>
+
+            <div class="control-group">
+
+                @Html.LabelFor(r => r.Type, "Kiểu sản phẩm", new { @class = "control-label" })
+
+                <div class="controls">
+                    @Html.TextBoxFor(r => r.Type, new { @class = "form-control", placeholder = "Kiểu sản phẩm", type = "number" })
+
+                </div>
+                @Html.ValidationMessageFor(r => r.Type)
+            </div>
+            <input type="submit" name="name" value="Cập nhật sản phẩm" class="btn btn-primary" />
+
+            <a href="/Admin/product/index/@Model.CategoryID" class="btn btn-danger">Hủy</a>
+        }
+    </div>
+
+</div>
+

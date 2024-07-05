@@ -1,0 +1,141 @@
+﻿@model TranDinhBien_BanHang.Models.Product
+@{
+    ViewBag.Title = "Delete";
+   
+}
+
+<div class="span9">
+    <h3>Xóa sản phẩm</h3>
+    <div class="well">
+        @using (Html.BeginForm("Delete", "Product", new {area ="Admin" }, FormMethod.Post, new { enctype = "multipart/dorm-data", @class = "form-horizontal", @style = "margin: 0px 160px 20px;" }))
+        {
+           
+            @Html.TextBoxFor(r => r.ProductID, new { @type = "hidden" })
+            <div class="control-group">
+                @Html.LabelFor(r => r.ProductName, "Tên sản phẩm", new { @class = "control-label" })
+                <div class="controls">
+                    @Html.TextBoxFor(r => r.ProductName, new { @class = "form-control", placeholder = "Tên sản phẩm" })
+
+                </div>
+            </div>
+
+            <div class="control-group">
+
+                @Html.LabelFor(r => r.Avatar, "Ảnh", new { @class = "control-label" })
+                <div class="controls">
+                    @Html.TextBoxFor(r => r.Avatar, new { @class = "form-control", placeholder = "Ảnh" })
+
+                </div>
+            </div>
+            <div class="control-group">
+
+                @Html.LabelFor(r => r.Price, "Giá sản phẩm", new { @class = "control-label" })
+                <div class="controls">
+                    @Html.TextBoxFor(r => r.Price, new { @class = "form-control", placeholder = "Giá sản phẩm", type = "number" })
+
+                </div>
+            </div>
+            <button class="btn btn-success" @*onclick="thongbao()"*@>Xóa</button>
+            <a href="/Admin/product/index/@Model.CategoryID" class="btn btn-danger">Hủy</a>
+           
+        }
+    </div>
+</div>
+<script>
+    @*function thongbao() {
+        // Ngăn chặn form submit
+        event.preventDefault();
+    // Hiển thị thông báo xác nhận
+    swal({
+        title: "Xóa sản phẩm",
+        text: "Bạn có chắc muốn xóa sản phẩm <b>@Model.ProductName</b> không?",
+        icon: "warning",
+        buttons: {
+            cancel: "Hủy",
+            oki: {
+                text: "Xóa",
+                value: true,
+            },
+        },
+    }).then((value) => {
+        if (value) {
+            // Xóa sản phẩm
+            // Thực hiện xóa sản phẩm bằng AJAX
+            $.ajax({
+                url: "/product/delete/@Model.ProductID",
+                type: "POST",
+                dataType: "json",
+                success: function(data) {
+                    if (data.Success) {
+                        // Xóa sản phẩm khỏi danh sách
+                        $(this).closest("tr").remove();
+                        // Hiển thị thông báo "Xóa thành công!"
+                        swal("Xóa thành công!", "", "information");
+                    }
+                    //else {
+                    //////    swal("Xóa !", "", "error");
+                    //////}
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    swal("Xóa thất bại!", "", "error");
+                }
+            });
+        }
+    });
+}*@
+   @*function thongbao() {
+    // Ngăn chặn form submit
+    event.preventDefault();
+
+    // Hiển thị thông báo xác nhận
+    swal({
+        title: "Xóa sản phẩm",
+        text: "Bạn có chắc muốn xóa sản phẩm <b>@Model.ProductName</b> không?",
+        icon: "warning",
+        buttons: {
+            cancel: "Hủy",
+            oki: {
+                text: "Xóa",
+                value: true,
+            },
+        },
+    }).then((value) => {
+        if (value) {
+            // Xóa sản phẩm
+            // Thực hiện xóa sản phẩm bằng AJAX
+            $.ajax({
+                url: "/product/delete/@Model.ProductID",
+                type: "POST",
+                dataType: "json",
+                success: function(data) {
+                    if (data.Success) {
+                        // Hiển thị thông báo "Xóa thành công!"
+                        swal("Xóa thành công!", "", "information").show();
+                        // Xóa sản phẩm khỏi danh sách
+                        $(this).closest("tr").remove();
+                        location.href = "/product";
+                    } else {
+                        // Kiểm tra giá trị của biến data
+                        if (data.Error) {
+                            // Hiển thị thông báo "Xóa thất bại!"
+                            swal("Xóa thất bại!", data.Error, "error").show();
+                        } else {
+                            // Không thực hiện xóa sản phẩm
+                        }
+                    }
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    swal("Xóa thất bại!", "", "error").show();
+                }
+            });
+        }
+    });
+}*@
+
+
+</script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+
+

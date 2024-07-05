@@ -1,0 +1,102 @@
+﻿@model TranDinhBien_BanHang.ViewModel.RegisterVM
+
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<div class="span9">
+    <h3>Đăng kí</h3>
+    <div class="well">
+
+        @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { enctype = "multipart/dorm-data", @class = "form-horizontal", @style = "margin: 0px 160px 20px;" }))
+        {
+           
+            <div class="control-group">
+
+                @*<lable class="control-label" for="ProductName">Product Name</lable>*@
+                @Html.LabelFor(r => r.Username, "Tên đăng kí", new { @class = "control-label" })
+                <div class="controls">
+                    @Html.TextBoxFor(r => r.Username, new { @class = "form-control", placeholder = "Tên đăng kí" })
+
+                    @*<input type="text"
+                        name="ProductName"
+                        value="ProductName"
+                        placeholder="Product Name"
+                        class="form-control" />*@
+                </div>
+                @Html.ValidationMessageFor(r => r.Username)
+            </div>
+
+            <div class="control-group">
+
+                @Html.LabelFor(r => r.Password, "Mật khẩu", new { @class = "control-label" })
+                <div class="controls">
+                    @Html.PasswordFor(r => r.Password, new { @class = "form-control", placeholder = "Mật khẩu"})
+                </div>
+                @Html.ValidationMessageFor(r => r.Password)
+            </div>
+
+
+            <div class="control-group">
+                @Html.LabelFor(r => r.ConfirmPassword, "Xác nhận mật khẩu", new { @class = "control-label" })
+                <div class="controls">
+                    @Html.PasswordFor(r => r.ConfirmPassword, new { @class = "form-control", placeholder = "Xác nhận mật khẩu " })
+                </div>
+                @Html.ValidationMessageFor(r => r.ConfirmPassword)
+            </div>
+
+            <div class="control-group">
+                @Html.LabelFor(r => r.Email, "Email", new { @class = "control-label" })
+                <div class="controls">
+                    @Html.TextBoxFor(r => r.Email, new { @class = "form-control", placeholder = "Email" })
+                </div>
+                @Html.ValidationMessageFor(r => r.Email)
+            </div>
+
+
+            <div class="control-group">
+
+                @Html.LabelFor(r => r.Mobile, "Số điện thoại", new { @class = "control-label" })
+                <div class="controls">
+                    @Html.TextBoxFor(r => r.Mobile, new { @class = "form-control", placeholder = "Số điện thoại" })
+                </div>
+               
+            </div>
+
+            <div class="control-group">
+
+                @Html.LabelFor(r => r.DateOfBirth, "Ngày sinh", new { @class = "control-label" })
+                <div class="controls">
+                    @Html.TextBoxFor(r => r.DateOfBirth, new { @class = "form-control", placeholder = "Ngày sinh", type="date" })
+                </div>
+               
+            </div>
+
+
+
+            <div class="control-group">
+
+                @Html.LabelFor(r => r.Address, "Địa chỉ", new { @class = "control-label" })
+                <div class="controls">
+                    @Html.TextBoxFor(r => r.Address, new { @class = "form-control", placeholder = "Địa chỉ"})
+                </div>
+               
+            </div>
+
+            <div class="control-group">
+
+                @Html.LabelFor(r => r.City, "Thành phố", new { @class = "control-label" })
+                <div class="controls">
+                    @Html.TextBoxFor(r => r.City, new { @class = "form-control", placeholder = "Thành phố" })
+
+                </div>
+            </div>
+            <button class="btn btn-success">Đăng kí</button>
+            <a href="/home" class="btn btn-danger">Hủy</a>
+        }
+
+    </div>
+
+</div>
+

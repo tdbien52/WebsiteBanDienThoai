@@ -1,0 +1,116 @@
+﻿@model TranDinhBien_BanHang.ViewModel.LoginVM
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Areas/Admin/Views/Shared/_LoginLayoutPage.cshtml";
+}
+<div class="col-lg-5">
+    <div class="card shadow-lg border-0 rounded-lg mt-5">
+        <div class="card-header"><h3 class="text-center font-weight-light my-4">Login</h3></div>
+        <div class="card-body">
+            @*@using (Html.BeginForm("Login", "Account", new { area = "Admin" }, FormMethod.Post, new { enctype = "multipart/dorm-data", @class = "form-horizontal", @style = "margin: 0px 160px 20px;" }))
+                {
+
+                    <div class="form-floating mb-3">
+                        @Html.LabelFor(r => r.Username, "Tên đăng kí", new { @class = "control-label" })
+                        <div class="controls">
+                            @Html.TextBoxFor(r => r.Username, new { @class = "form-control", placeholder = "Tên đăng kí" })
+
+
+                        </div>
+                        @Html.ValidationMessageFor(r => r.Username)
+                    </div>
+
+                    <div class="form-floating mb-3">
+
+                        @Html.LabelFor(r => r.Password, "Mật khẩu")
+                        <div class="controls">
+                            @Html.TextBoxFor(r => r.Password, new { @class = "form-control", placeholder = "Mật khẩu", type = "Password" })
+                        </div>
+                        @Html.ValidationMessageFor(r => r.Password)
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <div class="controls">
+                            @Html.ValidationSummary()
+                        </div>
+
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
+                        <button class="btn btn-success">Đăng nhập</button>
+                        <a href="/home" class="btn btn-danger">Hủy</a>
+                    </div>
+                }*@
+
+
+            @using (Html.BeginForm("Login", "Account", new { area = "Admin" }, FormMethod.Post, new { enctype = "multipart/dorm-data", @class = "form-horizontal" }))
+            {
+
+
+                <div class="form-floating mb-3">
+
+                    @Html.TextBoxFor(r => r.Username, new { @class = "form-control", id = "Username", type = "text", placeholder = "Username" })
+                    <label for="Username">User name</label>
+                    @Html.ValidationMessageFor(r => r.Username)
+                </div>
+                <div class="form-floating mb-3">
+
+                    @Html.TextBoxFor(r => r.Password, new { @class = "form-control", id = "Password", type = "password", placeholder = "Password" })
+                    <label for="Password">Password</label>
+                    @Html.ValidationMessageFor(r => r.Password)
+                </div>
+
+                <div class="form-floating mb-3">
+                    <div class="controls">
+                        @Html.ValidationSummary()
+                    </div>
+                </div>
+                <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
+                    <button class="btn btn-success">Đăng nhập</button>
+                    <a href="/home" class="btn btn-danger">Hủy</a>
+                </div>
+
+            }
+        </div>
+    </div>
+</div>
+@*<div class="span9">
+        <h3>Tạo mới sản phẩm</h3>
+        <div class="well">
+
+            @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { enctype = "multipart/dorm-data", @class = "form-horizontal", @style = "margin: 0px 160px 20px;" }))
+            {
+                <h4>Tạo mới</h4>
+                <div class="control-group">
+                    @Html.LabelFor(r => r.Username, "Tên đăng kí", new { @class = "control-label" })
+                    <div class="controls">
+                        @Html.TextBoxFor(r => r.Username, new { @class = "form-control", placeholder = "Tên đăng kí" })
+
+
+                    </div>
+                    @Html.ValidationMessageFor(r => r.Username)
+                </div>
+
+                <div class="control-group">
+
+                    @Html.LabelFor(r => r.Password, "Mật khẩu", new { @class = "control-label" })
+                    <div class="controls">
+                        @Html.TextBoxFor(r => r.Password, new { @class = "form-control", placeholder = "Mật khẩu", type = "Password" })
+                    </div>
+                    @Html.ValidationMessageFor(r => r.Password)
+                </div>
+
+                <div class="control-group">
+                    <div class="controls">
+                        @Html.ValidationSummary()
+                    </div>
+
+                </div>
+                <button class="btn btn-success">Đăng nhập</button>
+                <a href="/home" class="btn btn-danger">Hủy</a>
+            }
+
+        </div>
+
+    </div>*@
+

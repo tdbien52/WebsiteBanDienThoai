@@ -1,0 +1,68 @@
+﻿@model TranDinhBien_BanHang.Identity.AppUser
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayoutPage1.cshtml";
+}
+
+<div class="span9">
+    <h3>Chỉnh sửa người dùng</h3>
+    <div class="well">
+        @using (Html.BeginForm("Edit", "User", new { area = "Admin" }, FormMethod.Post, new { enctype = "multipart/dorm-data", @class = "form-horizontal", @style = "margin: 0px 160px 20px;" }))
+        {
+
+            @Html.TextBoxFor(r => r.Id, "Id", new { @class = "form-control", type = "hidden" })
+            <div class="control-group">
+
+                @Html.LabelFor(r => r.UserName, "Tên người dùng", new { @class = "control-label" })
+                <div class="controls">
+                    @Html.TextBoxFor(r => r.UserName, new { @class = "form-control", placeholder = "Tên người dùng", value="@Model.UserName" })
+
+                    @Html.ValidationMessageFor(r => r.UserName)
+                </div>
+            </div>
+
+            <div class="control-group">
+
+                @Html.LabelFor(r => r.Email, "Email", new { @class = "control-label" })
+                <div class="controls">
+                    @Html.TextBoxFor(r => r.Email, new { @class = "form-control", placeholder = "Email" })
+
+                </div>
+                @Html.ValidationMessageFor(r => r.Email)
+            </div>
+
+            <div class="control-group">
+
+                @Html.LabelFor(r => r.PhoneNumber, "Mobile", new { @class = "control-label" })
+                <div class="controls">
+                    @Html.TextBoxFor(r => r.PhoneNumber, new { @class = "form-control", placeholder = "Mobile" })
+
+                </div>
+            </div>
+
+            <div class="control-group">
+
+                @Html.LabelFor(r => r.City, "City", new { @class = "control-label" })
+                <div class="controls">
+                    @Html.TextBoxFor(r => r.City, new { @class = "form-control", placeholder = "City" })
+
+                </div>
+            </div>
+
+            <div class="control-group">
+
+                @Html.LabelFor(r => r.Birthday, "Date of Birth", new { @class = "control-label" })
+                <div class="controls">
+                    @Html.TextBoxFor(r => r.Birthday, new { @class = "form-control", placeholder = "Date of Birth", type="Date" })
+
+                </div>
+            </div>
+            <input type="submit" name="name" value="Cập nhật người dùng" class="btn btn-primary" />
+
+            <a href="/Admin/User/index" class="btn btn-danger">Hủy</a>
+        }
+    </div>
+
+</div>
+

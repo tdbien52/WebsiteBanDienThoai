@@ -1,0 +1,123 @@
+﻿@model List<TranDinhBien_BanHang.Models.Product>
+
+<h2>Danh sách sản phẩm</h2>
+<nav class="navbar navbar-expand-lg" style="background-color:wheat">
+    <div class="container-fluid">
+        <a class="btn btn-success" href="/admin/product/create/@ViewBag.CategoryID">Tạo sản phẩm</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                @*<li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>*@
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Chọn danh mục
+                    </a>
+                    <ul class="dropdown-menu">
+                        @foreach (var item in ViewBag.Category)
+                        {
+                            <li>
+                           <a class="dropdown-item" href="/admin/product/index/@item.CategoryID">
+                                @item.CategoryName</a>
+                            </li>
+                        }
+                    </ul>
+                </li>
+            </ul>
+            <form class="d-flex" role="search" method="get" action="/admin/product/index/@ViewBag.CategoryID?search=@ViewBag.Search">
+                <input class="form-control me-2" value="@ViewBag.Search" type="search" placeholder="Tìm kiếm" name="search"  aria-label="Search">
+                <button class="btn btn-outline-success" type="submit" id="search" >Tìm</button>
+            </form>
+        </div>
+    </div>
+</nav>
+<table class="table  table-bordered">
+    <tr>
+        <th>ID sản phẩm</th>
+        <th>Tên sản phẩm</th>
+        <th>Ảnh</th>
+        <th>ID thể loại</th>
+        <th>ID thương hiệu</th>
+        <th>Giá</th>
+        <th>Trạng thái</th>
+        <th>Kiểu sản phẩm</th>
+        <th>Thao tác</th>
+
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.ProductID</td>
+            <td><a href="/Admin/product/details/@item.ProductID">@item.ProductName</a></td>
+            <td>
+
+                @if (item.Avatar != null)
+                {
+                    <img src="~/themes/images/products/@item.Avatar" width="100px" />
+
+                }
+                else
+                {
+                    <img src="~/themes/images/products/" width="100px" />
+                }
+            </td>
+            <td>@item.Category.CategoryName</td>
+            <td>@item.Brand.BrandName</td>
+            <td>@string.Format("{0:0,000,000₫}", item.Price)</td>
+            <td>@item.Status</td>
+            <td>@item.Type</td>
+
+            <td>
+                <a href="/Admin/product/edit/@item.ProductID">Sửa</a> |
+                <a href="/Admin/product/delete/@item.ProductID">Xóa</a>
+
+            </td>
+
+        </tr>
+
+    }
+
+    <tr>
+        <td colspan="9">
+            @{
+                // lùi về page
+                int prevpage = ViewBag.Page - 1;
+                if (prevpage <= 0)
+                {
+                    prevpage = 1;
+                }
+
+                // nút chuyển sang page khác
+                int nextpage = ViewBag.Page + 1;
+                if (nextpage > ViewBag.NoOfPages)
+                {
+                    nextpage = ViewBag.NoOfPages;
+                }
+            }
+            <ul class="pagination justify-content-center">
+                <li class="page-item">
+                    <a class="page-link" href="/admin/Product/index?id=@ViewBag.CategoryID&page=@prevpage&search=@ViewBag.Search">Prev</a>
+                </li>
+                @for (int i = 0; i < ViewBag.NoOfPages; i++)
+                {
+                    if (i + 1 == ViewBag.Page)
+                    {
+                        <li class="page-item active"><a class="page-link" href="/admin/Product/index?id=@ViewBag.CategoryID&page=@(i+1)&search=@ViewBag.Search">@(i+1)</a></li>
+
+                    }
+                    else
+                    {
+                        <li class="page-item"><a class="page-link" href="/admin/Product/index?id=@ViewBag.CategoryID&page=@(i+1)&search=@ViewBag.Search">@(i+1)</a></li>
+                    }
+                }
+                <li class="page-item active">
+                    <a class="page-link" href="/admin/Product/index?id=@ViewBag.CategoryID&page=@nextpage&search=@ViewBag.Search">Next</a>
+                </li>
+            </ul>
+        </td>
+
+    </tr>
+</table>
+
+
+

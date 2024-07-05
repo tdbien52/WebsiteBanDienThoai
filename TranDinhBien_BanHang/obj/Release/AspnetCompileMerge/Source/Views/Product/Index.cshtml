@@ -1,0 +1,218 @@
+﻿@model List<TranDinhBien_BanHang.Models.Product>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+
+
+@*tiem kiem san pham*@
+@section search{
+    <form class="form-inline navbar-search" method="get" action="/product/index/@ViewBag.CategoryID?search=@ViewBag.Search">
+        <input @*id="srchFld"*@ class="srchTxt" id="search" type="text" name="search" value="@ViewBag.Search" placeholder="Search" />
+
+        <button type="submit" id="submitButton" class="btn btn-primary">Tìm kiếm</button>
+    </form>
+}
+
+@*thuc hien viec sap xep*@
+@{
+    string icon = "";
+    if (ViewBag.Icon == "fa-sort-desc")
+    {
+        icon = "fa-sort-asc";
+    }
+    else
+    {
+        icon = "fa-sort-desc";
+    }
+}
+
+@*menu sidebar*@
+@section sidemenu{
+    <ul id="sideManu" class="nav nav-tabs nav-stacked">
+        <li class="subMenu open">
+            <a>Danh mục</a>
+            <ul>
+                @foreach (var item in ViewBag.Category)
+                {
+
+                    <li>
+                        <a href="/Product/Index/@item.CategoryID">@item.CategoryName</a>
+                    </li>
+                }
+
+            </ul>
+        </li>
+    </ul>
+}
+
+
+@*menu sidebar item*@
+
+
+
+@*trang san pham*@
+<div class="span9">
+    <h3> @ViewBag.Name<small class="pull-right"> </small></h3>
+    <hr class="soft" />
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
+            Sắp xếp sản phẩm
+        </button>
+        <ul class="dropdown-menu">
+            <li>
+                <a href="/product/index?id=@ViewBag.CategoryID&Column=ProductName&Icon=@icon">
+                    Tên sản phẩm
+                    @if (ViewBag.Column == "ProductName")
+                    {
+
+                        <i class="fa @ViewBag.Icon"></i>
+
+                    }
+                </a>
+            </li>
+            <li>
+                <a href="/product/index?id=@ViewBag.CategoryID&Column=Price&Icon=@icon">
+                    Giá sản phẩm
+
+
+                    @if (ViewBag.Column == "Price")
+                    {
+
+                        <i class="fa @ViewBag.Icon"></i>
+
+                    }
+                </a>
+            </li>
+
+        </ul>
+    </div>
+    @*hiển thị dạng lưới và dang block*@
+    <div id="myTab" class="pull-right">
+        <a href="#listView" data-toggle="tab"><span class="btn btn-large"><i class="icon-list"></i></span></a>
+        <a href="#blockView" data-toggle="tab"><span class="btn btn-large btn-primary"><i class="icon-th-large"></i></span></a>
+    </div>
+    <br class="clr" />
+    <div class="tab-content">
+        <div class="tab-pane" id="listView">
+            @foreach (var item in Model)
+            {
+
+                <div class="row">
+                    <div class="span2">
+                        <a href="/product/details/@item.ProductID">
+                            <img src="~/themes/images/products/@item.Avatar" alt="" />
+                        </a>
+
+                    </div>
+                    <div class="span4">
+
+                        <h5><a href="/product/details/@item.ProductID">@item.ProductName</a></h5>
+                        <p>
+                            @item.FullDescription
+                        </p>
+                        <a class="btn btn-small pull-right" href="/product/details/@item.ProductID">Xem chi tiết</a>
+                        <br class="clr" />
+                    </div>
+                    <div class="span3 alignR">
+                        <form class="form-horizontal qtyFrm">
+
+                            <h3>@string.Format("{0:0,000,000₫}", item.Price)</h3>
+                            @*<label class="checkbox">
+                                    <input type="checkbox">  Adds product to compair
+                                </label><br />*@
+
+                            <a href="/product/details/@item.ProductID" class="btn btn-large btn-primary">Thêm vào<i class=" icon-shopping-cart"></i></a>
+                            <a href="/product/details/@item.ProductID" class="btn btn-large"><i class="icon-zoom-in"></i></a>
+
+                        </form>
+                    </div>
+
+                </div>
+
+                <hr class="soft" />
+            }
+
+        </div>
+
+        <div class="tab-pane  active" id="blockView">
+            <ul class="thumbnails">
+                @foreach (var item in Model)
+                {
+
+
+                    <li class="span3">
+
+                        <div class="thumbnail">
+                            <a href="/product/details/@item.ProductID"><img src="~/themes/images/products/@item.Avatar" alt="" /></a>
+                            <div class="caption">
+                                <h5><a href="/product/details/@item.ProductID">@item.ProductName</a></h5>
+                                <p>
+                                    @item.ShortDes
+                                </p>
+                                <h4 style="text-align:center"><a class="btn" href="/product/details/@item.ProductID"> <i class="icon-zoom-in"></i></a> <a class="btn" href="/product/details/@item.ProductID">Thêm vào <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="/product/details/@item.ProductID">@string.Format("{0:0,000,000₫}", item.Price)</a></h4>
+                                @*<div class="align-center" style="display:flex; justify-content:center">
+                                    <a href="/product/edit/@item.ProductID">Chỉnh Sửa</a> |
+                                    <a href="/product/delete/@item.ProductID">Xóa</a>
+                                </div>*@
+
+                            </div>
+                        </div>
+
+                    </li>
+
+
+                }
+            </ul>
+            <hr class="soft" />
+        </div>
+    </div>
+
+    @*Phân trang*@
+
+    @{
+        // lùi về page
+        int prevpage = ViewBag.Page - 1;
+        if (prevpage <= 0)
+        {
+            prevpage = 1;
+        }
+
+        // nút chuyển sang page khác
+        int nextpage = ViewBag.Page + 1;
+        if (nextpage > ViewBag.NoOfPages)
+        {
+            nextpage = ViewBag.NoOfPages;
+        }
+    }
+    <div class="pagination">
+        <ul>
+            <li class="page-item">
+                <a class="page-link" href="/product/index?id=@ViewBag.CategoryID&Column=@ViewBag.Column&Icon=@ViewBag.Icon&page=@prevpage&search=@ViewBag.Search">Prev</a>
+            </li>
+            @for (int i = 0; i < ViewBag.NoOfPages; i++)
+            {
+                if (i + 1 == ViewBag.Page)
+                {
+                    <li class="page-item active"><a class="page-link" href="/product/index?id=@ViewBag.CategoryID&Column=@ViewBag.Column&Icon=@ViewBag.Icon&page=@(i+1)&search=@ViewBag.Search">@(i+1)</a></li>
+
+                }
+                else
+                {
+                    <li class="page-item"><a class="page-link" href="/product/index?id=@ViewBag.CategoryID&Column=@ViewBag.Column&Icon=@ViewBag.Icon&page=@(i+1)&search=@ViewBag.Search">@(i+1)</a></li>
+                }
+            }
+            <li class="page-item">
+                <a class="page-link" href="/product/index?id=@ViewBag.CategoryID&Column=@ViewBag.Column&Icon=@ViewBag.Icon&page=@nextpage&search=@ViewBag.Search">Next</a>
+            </li>
+        </ul>
+    </div>
+    @*<div class="create">
+        <a class="text-error" style="font-weight:bold" href="/Admin/product/create">Tạo mới 1 sản phẩm</a>
+    </div>*@
+    <br class="clr" />
+</div>
+
+
+

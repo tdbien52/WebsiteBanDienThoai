@@ -1,0 +1,38 @@
+﻿@model TranDinhBien_BanHang.Identity.AppUser
+@{
+    ViewBag.Title = "MyProfile";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+
+
+<div class="span9">
+    <h2>Thông tin cá nhân</h2>
+    <div class="well">
+        <table class="table table-bordered">
+            <tr>
+                <th>UserName</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <th>City</th>
+                <th>Date of Birth</th>
+            </tr>
+            <tr>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <td>@Model.UserName</td>
+                    <td>@Model.Email</td>
+                    <td>@Model.PhoneNumber</td>
+                    <td>@Model.City</td>
+                    <td>@Model.Birthday</td>
+                }
+
+            </tr>
+
+        </table>
+    </div>
+</div>
+
+
+
+

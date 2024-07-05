@@ -1,0 +1,29 @@
+﻿@model List<TranDinhBien_BanHang.Models.Category>
+
+<h3>Danh mục</h3>
+<a href="/admin/category/create" class="btn btn-success" style="width:230px; margin:10px">Thêm danh mục</a>
+<table class="table table-bordered">
+    <tr>
+        @*<th>CategoryAvatar</th>*@
+        <th>ID thể loại</th>
+        <th>Tên thể loại</th>
+        <th>Thao tác</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            @*<td>@item.CategoryAvatar</td>*@
+            <td>@item.CategoryID</td>
+            <td>@item.CategoryName</td>
+            
+
+            <td>
+                <a href="/Admin/category/edit/@item.CategoryID">Sửa</a> |
+                <a href="/Admin/category/delete/@item.CategoryID">Xóa</a>
+            </td>
+
+        </tr>
+
+    }
+  
+</table>

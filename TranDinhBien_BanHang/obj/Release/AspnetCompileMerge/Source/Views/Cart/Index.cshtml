@@ -1,0 +1,53 @@
+﻿@model List<TranDinhBien_BanHang.Models.Cart>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<div class="span9">
+    <table class="table table-bordered">
+        <tr>
+            <th>#ID</th>
+            <th>Tên sản phẩm</th>
+            <th>Số lượng</th>
+            <th>Tổng giá</th>
+        </tr>
+        @{int i = 1; double totPrice = 0;}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @i
+                </td>
+                <td>@item.Product.ProductName</td>
+                <td style="display:flex">
+                    @using (Html.BeginForm("UpdateQuantity", "Cart", FormMethod.Get))
+                    {
+                        <input type="number" value="@item.Quantity" name="quan" min="1" style="width: 70px;" />
+                        <input type="hidden" name="proid" value="@item.ProductID" />
+                        <input type="hidden" name="action" value="2" />
+                        <input type="submit" value="Cập nhật" class="btn btn-primary" style="margin-top: -10px" />
+                    }
+                    @using (Html.BeginForm("Delete", "Cart", FormMethod.Get))
+                    {
+                        <input type="hidden" name="id" value="@item.ProductID" />
+                        <input type="submit" value="Xóa" class="btn btn-danger" style="margin-left: 3px" />
+                    }
+                </td>
+                <td>
+                    @{
+                        double Price = @item.Quantity * @item.Product.Price;
+                        i++;
+                        totPrice += Price;
+                    }
+                    @Price.ToString("N0") VNĐ
+                </td>
+            </tr>
+        }
+        <tr>
+            <td colspan="3" class="text-center fw-bold">Tổng tiền</td>
+            <td>@totPrice.ToString("N0") VNĐ</td>
+        </tr>
+    </table>
+    <a href="/home" style="color:green; font-weight:bold;"><i class="fa-solid fa-cart-shopping"></i>Tiếp tục mua hàng</a>
+</div>

@@ -1,0 +1,64 @@
+﻿@model TranDinhBien_BanHang.Models.Product
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<div class="span9">
+    <h3>Chi tiết sản phẩm</h3>
+    <div class="row" style="margin:40px">
+        <div id="gallery" class="span3">
+            <a href="~/themes/images/products/@Model.Avatar" title="@Model.ProductName">
+                <img src="~/themes/images/products/@Model.Avatar" style="width:350px" alt="@Model.ProductName" />
+            </a>
+
+        </div>
+        <div class="span6">
+            <h3>@Model.ProductName </h3>
+
+            <hr class="soft" />
+            <form class="form-horizontal qtyFrm">
+                <div class="control-group">
+                    <label class="control-label"><span>Giá bán: @string.Format("{0:0,000,000₫}", Model.Price)</span></label>
+                    @*<div class="controls">
+                        <input type="number" class="span1" placeholder="SL." />
+                        <button type="submit" class="btn btn-large btn-primary pull-right">Thêm vào<i class="fa-solid fa-cart-shopping"></i></button>
+                    </div>*@
+                </div>
+            </form>
+
+            <hr class="soft" />
+            <h5>Trạng thái: @Model.Status</h5>
+            <p>
+                Mô tả đầy đủ:
+                @Model.FullDescription
+            </p>
+            <a class="btn btn-small pull-right" href="#detail">Thêm chi tiết</a>
+            <br class="clr" />
+            <a href="#" name="detail"></a>
+            <hr class="soft" />
+        </div>
+
+        <div class="span9">
+            <h4>Thông Tin Sản Phẩm</h4>
+            <table class="table table-bordered">
+                <tbody>
+                    <tr class="techSpecRow"><th colspan="2">Thông tin chi tiết sản phẩm</th></tr>
+                    <tr class="techSpecRow"><td class="techSpecTD1">Loại sản phẩm: </td><td class="techSpecTD2">@Model.Category.CategoryName</td></tr>
+                    <tr class="techSpecRow"><td class="techSpecTD1">Thương hiệu: </td><td class="techSpecTD2">@Model.Brand.BrandName</td></tr>
+                    <tr class="techSpecRow"><td class="techSpecTD1">Giá Bán: </td><td class="techSpecTD2">@string.Format("{0:0,000,000₫}", Model.Price)</td></tr>
+                    <tr class="techSpecRow"><td class="techSpecTD1">Ngày mở bán</td><td class="techSpecTD2">@Model.CreateAt</td></tr>
+                </tbody>
+            </table>
+
+            <h5>Đặt trưng</h5>
+            <p>
+                @Model.FullDescription
+            </p>
+        </div>
+        @*<a href="@Url.Action("Index", "Product", new { area = "Admin", id=ViewData["CategoryID"]})" class="btn btn-danger">Hủy</a>
+        @Html.ActionLink("Hủy", "Index", "Product", new { area = "Admin", id = ViewBag.CategoryID }, new { @class = "btn btn-danger" })*@
+        <a href="/Admin/Product/index/@Model.CategoryID" class="btn btn-primary" style=" width: 230px">Trở về danh sách sản phẩm</a>
+    </div>
+</div>
+

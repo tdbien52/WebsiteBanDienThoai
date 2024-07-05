@@ -1,0 +1,193 @@
+﻿@model TranDinhBien_BanHang.Models.HomeModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+@section slide{
+    <div id="carouselBlk">
+        <div id="myCarousel" class="carousel slide">
+            <div class="carousel-inner">
+                <div class="item active">
+                    <div class="container">
+                        <a href="#"><img style="" src="~/themes/images/carousel/slide1.jpg" alt="special offers" /></a>
+                       
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="container">
+                        <a href="#"><img style="" src="~/themes/images/carousel/slide2.jpg" alt="" /></a>
+                       
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="container">
+                        <a href="#"><img src="~/themes/images/carousel/slide3.jpg" alt="" /></a>
+                       
+
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="container">
+                        <a href="#"><img src="~/themes/images/carousel/slide4.jpg" alt="" /></a>
+                       
+
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="container">
+                        <a href="#"><img src="~/themes/images/carousel/slide5.jpg" alt="" /></a>
+                        
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="container">
+                        <a href="#"><img src="~/themes/images/carousel/slide7.jpg" alt="" /></a>
+                        
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="container">
+                        <a href="#"><img src="~/themes/images/carousel/slide8.jpg" alt="" /></a>
+                       
+                    </div>
+                </div>
+            </div>
+            <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+            <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+        </div>
+    </div>
+}
+
+@*menu sidebar*@
+@section sidemenu{
+    <ul id="sideManu" class="nav nav-tabs nav-stacked">
+        <li class="subMenu open">
+            <a>Danh mục</a>
+            <ul>
+                @foreach (var item in Model.ListCategory)
+                {
+
+                    <li>
+                        @Html.ActionLink(item.CategoryName, "Index", "Product", new { @id = item.CategoryID }, null)
+                    </li>
+                }
+
+            </ul>
+        </li>
+    </ul>
+}
+@*menu sidebar item*@
+
+
+@*than ham index*@
+
+<div class="span9">
+    <div class="well well-small">
+        <h4>Sản phẩm nổi bật <small class="pull-right"></small></h4>
+        <div class="row-fluid">
+            <div id="featured" class="carousel slide">
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <ul class="thumbnails">
+                            @foreach (var item in Model.ListProduct.Where(r => r.Type == 1).Take(4))
+                            {
+                                <li class="span3">
+                                    <div class="thumbnail">
+                                        <i class="tag"></i>
+                                        <a href="/product/details/@item.ProductID"><img src="~/themes/images/products/@item.Avatar" alt=""></a>
+                                        <div class="caption">
+                                            <h5>@item.ProductName</h5>
+                                            <h4><a class="btn" href="/product/details/@item.ProductID">XEM</a> <span class="pull-right">@string.Format("{0:0,000,000₫}", item.Price)</span></h4>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+
+                        </ul>
+
+                    </div>
+                    <div class="item">
+                        <ul class="thumbnails">
+                            @foreach (var item in Model.ListProduct.Where(r => r.Type == 1).Take(4))
+                            {
+                                <li class="span3">
+                                    <div class="thumbnail">
+                                        <i class="tag"></i>
+                                        <a href="/product/details/@item.ProductID"><img src="~/themes/images/products/@item.Avatar" alt=""></a>
+                                        <div class="caption">
+                                            <h5>@item.ProductName</h5>
+                                            <h4><a class="btn" href="/product/details/@item.ProductID">XEM</a> <span class="pull-right">@string.Format("{0:0,000,000₫}", item.Price)</span></h4>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+
+                        </ul>
+
+                    </div>
+                    <div class="item">
+                        <ul class="thumbnails">
+                            @foreach (var item in Model.ListProduct.Where(r => r.Type == 1).Take(4))
+                            {
+                                <li class="span3">
+                                    <div class="thumbnail">
+                                        <i class="tag"></i>
+                                        <a href="/product/details/@item.ProductID"><img src="~/themes/images/products/@item.Avatar" alt=""></a>
+                                        <div class="caption">
+                                            <h5>@item.ProductName</h5>
+                                            <h4><a class="btn" href="/product/details/@item.ProductID">XEM</a> <span class="pull-right">@string.Format("{0:0,000,000₫}", item.Price)</span></h4>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+
+                        </ul>
+                    </div>
+                    <div class="item">
+                        <ul class="thumbnails">
+                            @foreach (var item in Model.ListProduct.Where(r => r.Type == 1).Take(4))
+                            {
+                                <li class="span3">
+                                    <div class="thumbnail">
+                                        <i class="tag"></i>
+                                        <a href="/product/details/@item.ProductID"><img src="~/themes/images/products/@item.Avatar" alt=""></a>
+                                        <div class="caption">
+                                            <h5>@item.ProductName</h5>
+                                            <h4><a class="btn" href="/product/details/@item.ProductID">XEM</a> <span class="pull-right">@string.Format("{0:0,000,000₫}", item.Price)</span></h4>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+
+                        </ul>
+                    </div>
+                </div>
+                <a class="left carousel-control" href="#featured" data-slide="prev">‹</a>
+                <a class="right carousel-control" href="#featured" data-slide="next">›</a>
+            </div>
+        </div>
+    </div>
+    <h4>Sản phẩm mới nhất </h4>
+    <ul class="thumbnails">
+        @foreach (var item in Model.ListProduct.Where(r => r.Type == 2).Take(9))
+        {
+            <li class="span3">
+                <div class="thumbnail">
+                    <a href="/product/details/@item.ProductID"><img src="~/themes/images/products/@item.Avatar" alt="" /></a>
+                    <div class="caption">
+                        <h5>@item.ProductName</h5>
+                        <p>
+                            @*Lorem Ipsum is simply dummy text.*@
+                            @item.ShortDes
+                        </p>
+
+                        <h4 style="text-align:center"><a class="btn" href="/product/details/@item.ProductID"> <i class="icon-zoom-in"></i></a> <a class="btn" href="/product/details/@item.ProductID">Thêm vào<i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="/product/details/@item.ProductID">@string.Format("{0:0,000,000₫}", item.Price)</a></h4>
+                    </div>
+                </div>
+            </li>
+
+        }
+    </ul>
+</div>
+

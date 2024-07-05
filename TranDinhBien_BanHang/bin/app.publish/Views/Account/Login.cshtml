@@ -1,0 +1,52 @@
+﻿@model TranDinhBien_BanHang.ViewModel.LoginVM
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+<style>
+    .validation-summary-errors{
+        color:red;
+    }
+</style>
+
+<div class="span9">
+    <h3>Đăng nhập</h3>
+    <div class="well">
+
+        @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { enctype = "multipart/dorm-data", @class = "form-horizontal", @style = "margin: 0px 160px 20px;" }))
+        {
+            
+            <div class="control-group">
+                @Html.LabelFor(r => r.Username, "Tên đăng nhập", new { @class = "control-label" })
+                <div class="controls">
+                    @Html.TextBoxFor(r => r.Username, new { @class = "form-control", placeholder = "Tên đăng nhập" })
+
+
+                </div>
+                @Html.ValidationMessageFor(r => r.Username)
+            </div>
+
+            <div class="control-group">
+
+                @Html.LabelFor(r => r.Password, "Mật khẩu", new { @class = "control-label" })
+                <div class="controls">
+                    @Html.TextBoxFor(r => r.Password, new { @class = "form-control", placeholder = "Mật khẩu", type = "Password" })
+                </div>
+                @Html.ValidationMessageFor(r => r.Password)
+            </div>
+
+            <div class="control-group">
+                <div class="controls">
+                    @Html.ValidationSummary()
+                </div>
+
+            </div>
+            <button class="btn btn-success">Đăng nhập</button>
+            <a href="/home" class="btn btn-danger">Hủy</a>
+        }
+
+    </div>
+
+</div>
+
